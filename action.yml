@@ -29,8 +29,8 @@ runs:
   steps:
     - shell: bash
       run: |
-      HEROKU_API_KEY="${{ inputs.heroku_api_key }}"
-      echo "HEROKU_API_KEY=${HEROKU_API_KEY}" >> $GITHUB_ENV
+        HEROKU_API_KEY="${{ inputs.heroku_api_key }}"
+        echo "HEROKU_API_KEY=${HEROKU_API_KEY}" >> $GITHUB_ENV
     - shell: bash
       run: heroku maintenance:on --app ${{ inputs.heroku_app_name }}
     - uses: akhileshns/heroku-deploy@v3.12.12
