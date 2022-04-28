@@ -27,10 +27,12 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: |
+    - shell: bash
+      run: |
       HEROKU_API_KEY="${{ inputs.heroku_api_key }}"
       echo "HEROKU_API_KEY=${HEROKU_API_KEY}" >> $GITHUB_ENV
-    - run: heroku maintenance:on --app ${{ inputs.heroku_app_name }}
+    - shell: bash
+      run: heroku maintenance:on --app ${{ inputs.heroku_app_name }}
     - uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{ inputs.heroku_api_key }}
@@ -38,10 +40,13 @@ runs:
         heroku_email: ${{ inputs.heroku_email }}
         branch: ${{ inputs.heroku_branch }}
         team: ${{ inputs.heroku_team }}
-    - run: heroku maintenance:off --app ${{ inputs.heroku_app_name }}
+    - shell: bash
+      run: heroku maintenance:off --app ${{ inputs.heroku_app_name }}
       if: failure()
-    - run: heroku run rails db:migrate --app ${{ inputs.heroku_app_name }}
-    - run: heroku maintenance:off --app ${{ inputs.heroku_app_name }}
+    - shell: bash
+      run: heroku run rails db:migrate --app ${{ inputs.heroku_app_name }}
+    - shell: bash
+      run: heroku maintenance:off --app ${{ inputs.heroku_app_name }}
       if: success()
     - uses: ePages-de/action-mattermost-notify@t42-deploy
         with:
