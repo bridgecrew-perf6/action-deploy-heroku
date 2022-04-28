@@ -49,22 +49,22 @@ runs:
       run: heroku maintenance:off --app ${{ inputs.heroku_app_name }}
       if: success()
     - uses: ePages-de/action-mattermost-notify@t42-deploy
-        with:
-          webhook-url: ${{ inputs.mattermost_webhook_url }}
-          username: ${{ inputs.mattermost_username }}
-          github-job: ${{ inputs.github_job }}
-          github-workflow: ${{ inputs.github_workflow }}
-          repository: ${{ inputs.github_repository }}
-          run-id: ${{ inputs.github_run_id }}
-          success-or-failure: failure
+      with:
+        webhook-url: ${{ inputs.mattermost_webhook_url }}
+        username: ${{ inputs.mattermost_username }}
+        github-job: ${{ inputs.github_job }}
+        github-workflow: ${{ inputs.github_workflow }}
+        repository: ${{ inputs.github_repository }}
+        run-id: ${{ inputs.github_run_id }}
+        success-or-failure: failure
       if: failure()
     - uses: ePages-de/action-mattermost-notify@t42-deploy
-        with:
-          webhook-url: ${{ inputs.mattermost_webhook_url }}
-          username: ${{ inputs.mattermost_username }}
-          github-job: ${{ inputs.github_job }}
-          github-workflow: ${{ inputs.github_workflow }}
-          repository: ${{ inputs.github_repository }}
-          run-id: ${{ inputs.github_run_id }}
-          success-or-failure: success
+      with:
+        webhook-url: ${{ inputs.mattermost_webhook_url }}
+        username: ${{ inputs.mattermost_username }}
+        github-job: ${{ inputs.github_job }}
+        github-workflow: ${{ inputs.github_workflow }}
+        repository: ${{ inputs.github_repository }}
+        run-id: ${{ inputs.github_run_id }}
+        success-or-failure: success
       if: success()
